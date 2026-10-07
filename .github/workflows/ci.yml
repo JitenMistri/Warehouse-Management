@@ -26,3 +26,9 @@ jobs:
 
       - name: Run tests and verify coverage
         run: ./mvnw -B clean verify
+
+      - name: Upload JaCoCo coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-coverage-report
+          path: java-assignment/target/site/jacoco/

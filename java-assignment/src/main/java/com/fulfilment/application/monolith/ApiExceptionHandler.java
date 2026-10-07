@@ -1,16 +1,17 @@
 package com.fulfilment.application.monolith;
 
-import com.fulfilment.application.monolith.fulfillment.FulfillmentResource;
+import com.fulfilment.application.monolith.fulfillment.adapter.inbound.FulfillmentResource;
 import com.fulfilment.application.monolith.products.ProductResource;
 import com.fulfilment.application.monolith.stores.StoreResource;
 import com.fulfilment.application.monolith.warehouses.adapters.restapi.WarehouseResourceImpl.WarehouseNotFoundApiException;
 import com.fulfilment.application.monolith.warehouses.domain.usecases.WarehouseNotFoundException;
 import com.fulfilment.application.monolith.warehouses.domain.usecases.WarehouseValidationException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {

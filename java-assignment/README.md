@@ -55,6 +55,14 @@ The bonus fulfilment requirements are also implemented:
 - A Warehouse can contain a maximum of 5 different Product types.
 ---
 
+### Store Event Observer
+
+Store creation and update operations publish application events inside the transaction.
+
+`StoreEventObserver` listens using `@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)` and invokes the legacy Store Manager only after the database transaction has successfully committed.
+
+This prevents the legacy system from being called when the Store transaction is rolled back.
+
 ## 3. Technology Stack
 
 - Java 17
@@ -413,3 +421,29 @@ SHOW_SQL=true
 - Database credentials can be supplied through environment variables.
 - JaCoCo enforces the configured minimum coverage threshold of 80%.
 - GitHub Actions runs the Maven verification process to ensure that tests and coverage checks pass before the build is considered successful.
+
+## Application Screenshots
+
+### Warehouse API
+
+The Warehouse API supports creating, retrieving, archiving and replacing warehouses.
+
+![Warehouse List](docs/screenshots/warehouse-list.png)
+
+![Warehouse Creation](docs/screenshots/warehouse-create.png)
+
+![3 Warehouse Limit Restriction](docs/screenshots/warehouse-restriction.png)
+
+### Fulfillment API
+
+The Fulfillment API validates the warehouse/store/product relationship and applies the configured fulfillment limits.
+
+![Fulfillment Creation](docs/screenshots/fulfillment-create.png)
+
+### Test Coverage
+
+JaCoCo is configured in the Maven build and the CI pipeline fails if the configured coverage threshold is not met.
+
+The current overall instruction coverage is **86%**.
+
+![JaCoCo Coverage](docs/screenshots/jacoco-coverage.png)
